@@ -9,14 +9,14 @@
       }
     },
     {
-      "src": "backend/src/server.js",
+      "src": "api/index.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "backend/src/server.js"
+      "dest": "/api/index.js"
     },
     {
       "src": "/(.*)",
@@ -24,7 +24,8 @@
     }
   ],
   "env": {
-    "SCAN_MODE": "traditional"
+    "SCAN_MODE": "traditional",
+    "VERCEL": "1"
   }
 }
 
