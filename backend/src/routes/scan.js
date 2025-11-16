@@ -9,7 +9,8 @@ const router = express.Router();
 // 配置 multer 文件上传
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const uploadPath = path.join(__dirname, '../uploads');
+    // Vercel 只允许写入 /tmp 目录
+    const uploadPath = process.env.VERCEL ? '/tmp/uploads' : path.join(__dirname, '../uploads');
     if (!fs.existsSync(uploadPath)) {
       fs.mkdirSync(uploadPath, { recursive: true });
     }
