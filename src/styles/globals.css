@@ -1,0 +1,172 @@
+@import "tailwindcss";
+
+@theme {
+  /* Enhanced Color Palette - Cyberpunk Terminal Theme */
+  /* Primary Colors */
+  --color-terminal-green: #00FF88;
+  --color-terminal-green-light: #33FFB8;
+  --color-terminal-green-dark: #00CC70;
+  
+  /* Accent Colors */
+  --color-terminal-cyan: #00D9FF;
+  --color-terminal-blue: #0080FF;
+  --color-terminal-purple: #9D00FF;
+  
+  /* Background Colors */
+  --color-terminal-dark: #0A0A0A;
+  --color-terminal-darker: #050505;
+  --color-terminal-gray: #1A1A1A;
+  --color-terminal-gray-light: #2A2A2A;
+  
+  /* Borders */
+  --color-terminal-border: #00FF88;
+  --color-terminal-border-dim: rgba(0, 255, 136, 0.3);
+  
+  /* Status Colors */
+  --color-terminal-danger: #FF3366;
+  --color-terminal-warning: #FFB800;
+  --color-terminal-success: #00FF88;
+  --color-terminal-info: #00D9FF;
+  
+  /* Shadows & Glows */
+  --shadow-terminal: 0 4px 16px rgba(0, 0, 0, 0.9);
+  --shadow-terminal-glow: 0 0 20px rgba(0, 255, 136, 0.4);
+  --shadow-terminal-glow-strong: 0 0 30px rgba(0, 255, 136, 0.6);
+  --shadow-cyan-glow: 0 0 20px rgba(0, 217, 255, 0.4);
+  --shadow-purple-glow: 0 0 20px rgba(157, 0, 255, 0.4);
+}
+
+body {
+  background: #0A0A0A;
+  color: #00FF88;
+  min-height: 100vh;
+  font-family: 'Courier New', monospace;
+}
+
+/* Terminal Card Style */
+.glass-card {
+  background: #0A0A0A;
+  border: 1px solid #00FF88;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.2), inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Terminal Glow Text */
+@keyframes terminal-pulse {
+  0%, 100% {
+    text-shadow: 0 0 5px rgba(0, 255, 136, 0.5);
+  }
+  50% {
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.8);
+  }
+}
+
+.neon-text {
+  animation: terminal-pulse 2s ease-in-out infinite;
+  color: #00FF88;
+}
+
+/* Scan Line Animation */
+@keyframes scan {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.scan-line {
+  animation: scan 3s linear infinite;
+  background: linear-gradient(transparent, rgba(0, 255, 136, 0.1), transparent);
+  height: 2px;
+}
+
+/* Grid Background */
+.cyber-grid {
+  background-image: 
+    linear-gradient(rgba(0, 255, 136, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 136, 0.1) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+/* Terminal Cursor Blink */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.terminal-cursor {
+  animation: blink 1s step-end infinite;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0A0A0A;
+  border: 1px solid #00FF88;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00FF88;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00CC70;
+}
+
+/* Custom scrollbar for terminals */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #000;
+  border-left: 1px solid #00FF88;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #00FF88;
+  border-radius: 0;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #33FFB8;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+/* Terminal Button */
+.terminal-button {
+  background: transparent;
+  border: 2px solid #00FF88;
+  color: #00FF88;
+  padding: 8px 16px;
+  font-family: 'Courier New', monospace;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 0 5px rgba(0, 255, 136, 0.3);
+}
+
+.terminal-button:hover {
+  background: #00FF88;
+  color: #0A0A0A;
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
+}
+
+/* Terminal Input */
+.terminal-input {
+  background: #0A0A0A;
+  border: 1px solid #00FF88;
+  color: #00FF88;
+  font-family: 'Courier New', monospace;
+  padding: 8px;
+  outline: none;
+}
+
+.terminal-input:focus {
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
