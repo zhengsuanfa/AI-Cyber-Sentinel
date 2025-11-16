@@ -89,6 +89,7 @@ exports.uploadFolderAndScan = async (req, res) => {
 
     const startTime = Date.now();
     const allVulnerabilities = [];
+    const allAnalysisLogs = [];
     const fileResults = [];
     let totalSize = 0;
 
@@ -101,11 +102,23 @@ exports.uploadFolderAndScan = async (req, res) => {
       totalSize += file.size;
 
       try {
+        // 添加文件开始扫描的日志
+        allAnalysisLogs.push({
+          message: `开始扫描文件: ${fileName}`,
+          type: 'info',
+          timestamp: new Date().toISOString()
+        });
+
         // 读取文件内容
         const fileContent = fs.readFileSync(filePath, 'utf-8');
 
         // 执行扫描
         const scanResult = await vulnerabilityScanner.scan(fileContent, fileExtension, fileName);
+
+        // 收集分析日志
+        if (scanResult.analysisLogs) {
+          allAnalysisLogs.push(...scanResult.analysisLogs);
+        }
 
         fileResults.push({
           fileName,
@@ -147,6 +160,13 @@ exports.uploadFolderAndScan = async (req, res) => {
     // 生成扫描 ID
     const scanId = Date.now().toString(36) + Math.random().toString(36).substr(2);
 
+    // 添加总结日志
+    allAnalysisLogs.push({
+      message: `批量扫描完成，共扫描 ${req.files.length} 个文件`,
+      type: 'success',
+      timestamp: new Date().toISOString()
+    });
+
     // 保存结果
     const result = {
       id: scanId,
@@ -159,6 +179,7 @@ exports.uploadFolderAndScan = async (req, res) => {
       totalVulnerabilities: allVulnerabilities.length,
       riskLevel: overallRiskLevel,
       fileResults,
+      analysisLogs: allAnalysisLogs,
       status: 'completed'
     };
 

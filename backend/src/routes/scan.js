@@ -48,7 +48,7 @@ const upload = multer({
 
 // 路由
 router.post('/upload', upload.single('file'), scanController.uploadAndScan);
-router.post('/upload-folder', upload.array('files', 100), scanController.uploadFolderAndScan); // 支持最多100个文件
+router.post('/upload-folder', upload.array('files'), scanController.uploadFolderAndScan); // 不限制文件数量
 router.get('/result/:id', scanController.getResult);
 
 module.exports = router;
